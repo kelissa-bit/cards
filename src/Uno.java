@@ -72,15 +72,15 @@ public class Uno extends CardGame {
         if (card.value.equals("Skip") || card.value.equals("Reverse")) {
             // right now this only supports 2 players, so Reverse is the same as Skip
             System.out.println("Skipping opponent's turn"); 
-            switchTurns(); // Skip opponent's turn
+            //switchTurns(); // Skip opponent's turn
         } else if (card.value.startsWith("Draw ")) {
             System.out.println("Skipping opponent's turn");
             int drawNum = "Draw Two".equals(card.value) ? 2 : 4;
             for (int i = 0; i < drawNum; i++) {
                 // refactored into superclass, assuming you've already switched turns to the opponent
-                drawCard(playerOneTurn ? playerOneHand : playerTwoHand);
+                //drawCard(playerOneTurn ? playerOneHand : playerTwoHand);
             }
-            switchTurns();
+            //switchTurns();
         }
     }
 
@@ -148,7 +148,7 @@ public class Uno extends CardGame {
             drawCard(playerTwoHand);
             playerTwoHand.getCard(0).setTurned(true);
             System.out.println("player two draws");
-            switchTurns();
+            //switchTurns();
             return;
         }
         if (playCard(choice, playerTwoHand)) {

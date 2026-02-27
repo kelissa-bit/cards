@@ -2,7 +2,7 @@ import processing.core.PApplet;
 
 public class App extends PApplet {
 
-    CardGame cardGame = new Uno();
+    CardGame cardGame = new Spit();
     private int timer;
 
     public static void main(String[] args) {
@@ -39,9 +39,9 @@ public class App extends PApplet {
         text("Draw", cardGame.drawButton.x + cardGame.drawButton.width / 2, cardGame.drawButton.y + cardGame.drawButton.height / 2);
 
         // Display current player
-        fill(0);
-        textSize(16);
-        text("Current Player: " + cardGame.getCurrentPlayer(), width / 2, 20);
+        //fill(0);
+        //textSize(16);
+        //text("Current Player: " + cardGame.getCurrentPlayer(), width / 2, 20);
 
         // Display deck size
         text("Deck Size: " + cardGame.getDeckSize(), width / 2,
