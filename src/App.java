@@ -23,6 +23,8 @@ public class App extends PApplet {
                 card.draw(this);
             }
         }
+        
+
         // Draw computer hand
         for (int i = 0; i < cardGame.playerTwoHand.getSize(); i++) {
             Card card = cardGame.playerTwoHand.getCard(i);
