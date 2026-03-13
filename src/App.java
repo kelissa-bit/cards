@@ -2,7 +2,7 @@ import processing.core.PApplet;
 
 public class App extends PApplet {
 
-    CardGame cardGame = new Spit();
+    Spit cardGame = new Spit();
     private int timer;
 
     public static void main(String[] args) {
@@ -11,6 +11,7 @@ public class App extends PApplet {
     @Override
     public void settings() {
         size(600, 600);   
+        cardGame.discardPiles();
     }
 
     @Override
@@ -32,36 +33,47 @@ public class App extends PApplet {
                 card.draw(this);
             }
         }
-        
-        // Draw draw button
-        fill(200);
-        cardGame.drawButton.draw(this);
-        fill(0);
-        textAlign(CENTER, CENTER);
-        text("Draw", cardGame.drawButton.x + cardGame.drawButton.width / 2, cardGame.drawButton.y + cardGame.drawButton.height / 2);
+
+        // draw discardpile!
+        if (!cardGame.discardPile.isEmpty()) {
+            Card card = cardGame.discardPile.get(cardGame.discardPile.size()-1);
+            card.setPosition(350, 240);
+            card.draw(this);
+        }
+
+        // draw discardpile2!
+        if (!cardGame.discardPile2.isEmpty()) {
+            Card card = cardGame.discardPile2.get(cardGame.discardPile2.size()-1);
+            card.setPosition(200, 240);
+            card.draw(this);
+        }
 
         // Display current player
-        //fill(0);
-        //textSize(16);
-        //text("Current Player: " + cardGame.getCurrentPlayer(), width / 2, 20);
+        fill(0);
+        textSize(16);
+        text("Current Player: " + cardGame.getCurrentPlayer(), width / 2, 20);
 
         // Display deck size
         text("Deck Size: " + cardGame.getDeckSize(), width / 2,
                 height - 20);
         // Display last played card
-        if (cardGame.getLastPlayedCard() != null) {
-            cardGame.getLastPlayedCard().setPosition(width / 2 - 40, height / 2 - 60, 80, 120);
-            cardGame.getLastPlayedCard().draw(this);
-        }
+        // if (cardGame.getLastPlayedCard() != null) {
+        //     cardGame.getLastPlayedCard().setPosition(width / 2 - 40, height / 2 - 60, 80, 120);
+        //     cardGame.getLastPlayedCard().draw(this);
+        // }
         if (cardGame.getCurrentPlayer() == "Player Two") {
             fill(0);
             textSize(16);
             text("Computer is thinking...", width / 2, height / 2 + 80);
             timer++;
-            if (timer == 100) {
-                cardGame.handleComputerTurn();
+            if (timer == 50) {
+                cardGame.handleComputerTurn();;
                 timer = 0;
             }
+        }
+
+        if(cardGame.getCurrentPlayer() == "Player One") {
+            cardGame.handleMyTurn();
         }
 
         cardGame.drawChoices(this);
@@ -70,7 +82,6 @@ public class App extends PApplet {
     
     @Override
     public void mousePressed() {
-        cardGame.handleDrawButtonClick(mouseX, mouseY);
         cardGame.handleCardClick(mouseX, mouseY);
     }
 

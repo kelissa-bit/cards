@@ -46,4 +46,18 @@ public class Hand {
             cards.get(i).setPosition(x, y, cardWidth, cardHeight);
         }
     }
+
+    public void positionCardsInPiles(int startX, int startY, int cardWidth, int cardHeight, int xSpacing) {
+        int cardIndex = 0;
+        for (int pile = 1; pile <= 5; pile++) {
+            int x = startX + (pile - 1) * xSpacing;
+            int y = startY;
+            for (int cardsInPiles = 0; cardsInPiles < pile; cardsInPiles++) {
+                if (cardIndex >= cards.size()) return;
+                cards.get(cardIndex).setPosition(x, y, cardWidth, cardHeight);
+                cardIndex++;
+        }
+    }
+}
+
 }

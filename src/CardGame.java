@@ -26,7 +26,7 @@ public class CardGame {
 
     public CardGame() {
         initializeGame();
-        dealCards(6);
+        dealCards(15);
     }
 
     protected void initializeGame() {
@@ -63,13 +63,13 @@ public class CardGame {
         for (int i = 0; i < numCards; i++) {
             playerOneHand.addCard(deck.remove(0));
             Card card = deck.remove(0);
-            card.setTurned(true);
+            card.setTurned(false);
             playerTwoHand.addCard(card);
         }
 
         // position cards
-        playerOneHand.positionCards(50, 450, 80, 120, 20);
-        playerTwoHand.positionCards(50, 50, 80, 120, 20);
+        playerOneHand.positionCardsInPiles(50, 450, 80, 120, 100);
+        playerTwoHand.positionCardsInPiles(50, 50, 80, 120, 100);
     }
 
     protected boolean isValidPlay(Card card) {
@@ -83,7 +83,7 @@ public class CardGame {
             // Reshuffle discard pile into deck if deck is empty
             lastPlayedCard = discardPile.remove(discardPile.size() - 1);
             deck.addAll(discardPile);
-            discardPile.clear();
+            // discardPile.clear();
             discardPile.add(lastPlayedCard);
             Collections.shuffle(deck);
 
@@ -120,8 +120,8 @@ public class CardGame {
 
     public void switchTurns() {
         playerOneTurn = !playerOneTurn;
-        playerOneHand.positionCards(50, 450, 80, 120, 20);
-        playerTwoHand.positionCards(50, 50, 80, 120, 20);
+        playerOneHand.positionCards(50, 450, 80, 120, 100);
+        playerTwoHand.positionCards(50, 50, 80, 120, 100);
     }
 
     public String getCurrentPlayer() {
