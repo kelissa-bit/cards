@@ -120,8 +120,8 @@ public class CardGame {
 
     public void switchTurns() {
         playerOneTurn = !playerOneTurn;
-        playerOneHand.positionCards(50, 450, 80, 120, 100);
-        playerTwoHand.positionCards(50, 50, 80, 120, 100);
+        playerOneHand.positionCardsInPiles(50, 450, 80, 120, 100);
+        playerTwoHand.positionCardsInPiles(50, 50, 80, 120, 100);
     }
 
     public String getCurrentPlayer() {

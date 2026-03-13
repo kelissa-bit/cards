@@ -63,7 +63,9 @@ public class Spit extends CardGame {
     }
 
     public boolean playerCanPlay(Hand hand) {
-         for (int i = 0; i < hand.getSize(); i++) {
+         for (int pile = 1; pile <= 5; pile++) {
+            int i = (pile * (pile + 1)) / 2 - 1;
+            if (i >= hand.getSize()) continue;
             Card card = hand.getCard(i);
             if (card != null) {
                 if (isValidPlay(card, discardPile) || isValidPlay(card, discardPile2)) {
