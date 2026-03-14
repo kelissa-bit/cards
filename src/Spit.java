@@ -23,6 +23,18 @@ public class Spit extends CardGame {
         return -1;
     }
 
+    public void winCondition() {
+        if (playerOneHand.getSize() == 0) {
+            gameOver = true;
+            playerWon = true;
+        }
+        
+        if (playerTwoHand.getSize() == 0) {
+            gameOver = true;
+            playerWon = false;
+        }
+    }
+
     protected boolean isValidPlay(Card card, ArrayList<Card> pile) {
         if (pile.isEmpty()) return false;
 
@@ -45,7 +57,7 @@ public class Spit extends CardGame {
         hand.removeCard(card);
         card.setTurned(false);
         discardPile.add(card);
-
+        winCondition();
         switchTurns();
         return true;
     }
@@ -54,11 +66,12 @@ public class Spit extends CardGame {
         hand.removeCard(card);
         card.setTurned(false);
         discardPile2.add(card);
-
+        winCondition();
         switchTurns();
         return true;
     }
     System.out.println("Invalid play: " + card.value + " of " + card.suit);
+    winCondition();
     return false;
     }
 
@@ -88,6 +101,7 @@ public class Spit extends CardGame {
         boolean personCanPlay = playerCanPlay(playerOneHand);
         
         if (computerCanPlay) {
+            if (gameOver) return;
             for (int i = 0; i < playerTwoHand.getSize(); i++) {
                 Card card = playerTwoHand.getCard(i);
                 if (card != null && (isValidPlay(card, discardPile) || isValidPlay(card, discardPile2))) {
@@ -110,6 +124,7 @@ public class Spit extends CardGame {
     }
 
     public void handleMyTurn() {
+        if (gameOver) return;
         boolean computerCanPlay = playerCanPlay(playerTwoHand);
         boolean personCanPlay = playerCanPlay(playerOneHand);
 
@@ -123,4 +138,7 @@ public class Spit extends CardGame {
             return;
         }
     }
+
+    boolean gameOver = false;
+    boolean playerWon = false;
 }

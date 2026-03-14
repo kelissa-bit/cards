@@ -14,8 +14,36 @@ public class App extends PApplet {
         cardGame.discardPiles();
     }
 
+    public void gameOverScreen() {
+        background(255);
+        fill (0);
+        textSize(30);
+        textAlign(CENTER);
+
+        if (cardGame.playerWon) {
+            text("wow... you won the spit showdown!!! \n" + 
+            "you are truly the spit master.\n" + 
+            "\n" +
+            "i present to you...\n" +
+            "this beautiful trophy!", width/2, height/2-50);
+        } else {
+            text("oh... you lost...\n" + 
+            "you lost against my poorly coded robot...\n" +
+            "\n" +
+            "well.\n" +
+            "you can always try again!", width/2, height/2 - 50);
+        }
+
+        textSize(20);
+        text("click to rematch!", width/2, 40);
+    }
+
     @Override
     public void draw() {
+        if (cardGame.gameOver) {
+            gameOverScreen();
+            return;
+        }
         background(255);
         // Draw player hands
         for (int i = 0; i < cardGame.playerOneHand.getSize(); i++) {
@@ -78,10 +106,13 @@ public class App extends PApplet {
 
         cardGame.drawChoices(this);
     }
-
     
     @Override
     public void mousePressed() {
+        if (cardGame.gameOver) {
+            cardGame = new Spit();
+            return;
+        }
         cardGame.handleCardClick(mouseX, mouseY);
     }
 
