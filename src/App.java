@@ -20,18 +20,21 @@ public class App extends PApplet {
         textSize(30);
         textAlign(CENTER);
 
-        if (cardGame.playerWon) {
+        if (cardGame.tie) {
+            text ("there are too many \"draws\" in this code so i'm calling it a tie.", width/2, height/2)
+        }
+        else if (cardGame.playerWon) {
             text("wow... you won the spit showdown!!! \n" + 
             "you are truly the spit master.\n" + 
             "\n" +
             "i present to you...\n" +
-            "this beautiful trophy!", width/2, height/2);
+            "this beautiful trophy!", width/2, height/2 + 100);
         } else {
             text("oh... you lost...\n" + 
             "you lost to my poorly coded robot...\n" +
             "\n" +
             "well.\n" +
-            "you can always try again!", width/2, height/2 - 40);
+            "you can always try again!", width/2, height/2);
         }
 
         textSize(20);

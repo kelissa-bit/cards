@@ -24,6 +24,9 @@ public class Spit extends CardGame {
     }
 
     public void winCondition() {
+
+        boolean computerCanPlay = playerCanPlay(playerTwoHand);
+        boolean personCanPlay = playerCanPlay(playerOneHand); 
         if (playerOneHand.getSize() == 0) {
             gameOver = true;
             playerWon = true;
@@ -32,6 +35,11 @@ public class Spit extends CardGame {
         if (playerTwoHand.getSize() == 0) {
             gameOver = true;
             playerWon = false;
+        }
+
+        if (deck.size() == 0 && !computerCanPlay && !personCanPlay) {
+            gameOver = true;
+            tie = true;
         }
     }
 
@@ -116,7 +124,10 @@ public class Spit extends CardGame {
         }
 
         if (!computerCanPlay && !personCanPlay) {
-            spiiiit();
+            winCondition();
+            if (!gameOver) {
+                spiiiit();
+            }
             return;
         }
 
@@ -133,11 +144,16 @@ public class Spit extends CardGame {
         } 
             
         if (!personCanPlay && !computerCanPlay) {
-            spiiiit();
+            winCondition();
+
+            if (!gameOver) {
+                spiiiit();
+            }
             return;
         }
     }
 
     boolean gameOver = false;
     boolean playerWon = false;
+    boolean tie = false;
 }
