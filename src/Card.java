@@ -22,6 +22,14 @@ public class Card extends ClickableRectangle {
         this.img = img;
     }
 
+    Card(String value, String suit, PApplet sketch) {
+        this.value = value;
+        this.suit = suit;
+        String filename = "data/" + value + suit + ".png";
+        this.img = sketch.loadImage(filename);
+    }
+
+
     public void setTurned(boolean turned) {
         this.turned = turned;
     }
@@ -82,16 +90,11 @@ public class Card extends ClickableRectangle {
         } else {
             sketch.stroke(0);
         }
-        if (img != null) {
-            sketch.image(img, x, y, width, height);
-        } else {
-            sketch.fill(255);
-            sketch.rect(x, y, width, height);
-            sketch.fill(0);
-            sketch.text(value, x + 10, y + 10);
-            sketch.text(suit, x + 40, y + 100);
-
-        }
-        sketch.strokeWeight(1);
+        if (img == null) {
+            String filename = value + suit + ".png";
+            img = sketch.loadImage(filename);
+        } 
+        
+        sketch.image(img, x, y, width, height);
     }
 }
