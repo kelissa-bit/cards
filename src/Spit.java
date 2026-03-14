@@ -52,27 +52,26 @@ public class Spit extends CardGame {
 
      public boolean playCard(Card card, Hand hand) {
         // Check if card is valid to play
+        if (!isValidPlay(card, discardPile) && !isValidPlay(card, discardPile2)) {
+            System.out.println("Invalid play: " + card.value + " of " + card.suit);
+            return false;
+        }
+
+        hand.removeCard(card);
+        card.setTurned(false);
+
         if (isValidPlay(card, discardPile)) {
+            discardPile.add(card);
+        } else {
+            discardPile2.add(card);
+        }
 
-        hand.removeCard(card);
-        card.setTurned(false);
-        discardPile.add(card);
         winCondition();
-        switchTurns();
-        return true;
-    }
-    if (isValidPlay(card, discardPile2)) {
 
-        hand.removeCard(card);
-        card.setTurned(false);
-        discardPile2.add(card);
-        winCondition();
-        switchTurns();
+        if (!gameOver) {
+            switchTurns();
+        }
         return true;
-    }
-    System.out.println("Invalid play: " + card.value + " of " + card.suit);
-    winCondition();
-    return false;
     }
 
     public boolean playerCanPlay(Hand hand) {

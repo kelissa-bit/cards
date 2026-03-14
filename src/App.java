@@ -25,17 +25,17 @@ public class App extends PApplet {
             "you are truly the spit master.\n" + 
             "\n" +
             "i present to you...\n" +
-            "this beautiful trophy!", width/2, height/2-50);
+            "this beautiful trophy!", width/2, height/2);
         } else {
             text("oh... you lost...\n" + 
-            "you lost against my poorly coded robot...\n" +
+            "you lost to my poorly coded robot...\n" +
             "\n" +
             "well.\n" +
-            "you can always try again!", width/2, height/2 - 50);
+            "you can always try again!", width/2, height/2 - 40);
         }
 
         textSize(20);
-        text("click to rematch!", width/2, 40);
+        text("click to rematch!", width/2, 550);
     }
 
     @Override
